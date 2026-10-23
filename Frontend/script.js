@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://multi-format-rag.onrender.com"; // Replace with your actual Render backend URL
 
 const fileInput = document.getElementById('fileInput');
 const dropzone = document.getElementById('dropzone');
@@ -12,7 +12,7 @@ const selectAllBtn = document.getElementById('selectAllBtn');
 // Fetch and render files on startup
 async function fetchFiles() {
     try {
-        const response = await fetch(`${API_URL}/files`);
+        const response = await fetch(`${API_BASE_URL}/files`);
         const files = await response.json();
         
         fileList.innerHTML = '';
@@ -31,7 +31,7 @@ async function fetchFiles() {
 
 async function checkBackendHealth() {
     try {
-        const response = await fetch(`${API_URL}/`);
+        const response = await fetch(`${API_BASE_URL}/`);
         const data = await response.json();
         if (data.status === "running") {
             apiStatus.textContent = "System Online";
@@ -72,7 +72,7 @@ async function handleFiles(files) {
         fileList.appendChild(li);
 
         try {
-            const response = await fetch(`${API_URL}/upload`, {
+            const response = await fetch(`${API_BASE_URL}/upload`, {
                 method: 'POST',
                 body: formData
             });
@@ -107,7 +107,7 @@ async function deleteFile(filename, btnElement) {
     if (!confirm(`Are you sure you want to delete "${filename}"?`)) return;
     
     try {
-        const response = await fetch(`${API_URL}/files/${encodeURIComponent(filename)}`, {
+        const response = await fetch(`${API_BASE_URL}/files/${encodeURIComponent(filename)}`, {
             method: 'DELETE'
         });
         
@@ -156,7 +156,7 @@ async function sendMessage() {
     const loadingId = appendMessage('<i class="fa-solid fa-spinner fa-spin"></i> Thinking...', 'bot-message', true);
 
     try {
-        const response = await fetch(`${API_URL}/chat`, {
+        const response = await fetch(`${API_BASE_URL}/chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ question, selected_sources: selectedSources })
@@ -195,7 +195,7 @@ const resetChatBtn = document.getElementById('resetChatBtn');
 resetChatBtn.addEventListener('click', async () => {
     if (!confirm("Start a new chat and clear history?")) return;
     try {
-        await fetch(`${API_URL}/reset-chat`, { method: 'POST' });
+        await fetch(`${API_BASE_URL}/reset-chat`, { method: 'POST' });
         chatMessages.innerHTML = `
             <div class="message bot-message">
                 <div class="message-content">
