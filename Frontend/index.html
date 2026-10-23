@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Format RAG Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar for Document Upload -->
+        <aside class="sidebar">
+            <h2><i class="fa-solid fa-folder-open"></i> Knowledge Base</h2>
+            <p class="subtitle">Upload PDF, DOCX, XLSX, CSV, or TXT files.</p>
+            
+            <div class="upload-dropzone" id="dropzone">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Drag & drop files here or</span>
+                <label for="fileInput" class="browse-btn">Browse Files</label>
+                <input type="file" id="fileInput" multiple accept=".pdf,.docx,.xlsx,.csv,.txt" hidden>
+            </div>
+
+            <div class="file-list-container">
+                <div class="file-list-header">
+                    <h3>Uploaded Files</h3>
+                    <div class="selection-actions">
+                        <button id="selectAllBtn" title="Select All"><i class="fa-solid fa-check-double"></i></button>
+                    </div>
+                </div>
+                <ul id="fileList">
+                    <li class="no-files">No documents uploaded yet.</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-main">
+            <header class="chat-header">
+                <h1><i class="fa-solid fa-robot"></i> AI Document Assistant</h1>
+                <div class="header-actions">
+                    <button id="resetChatBtn" title="Clear Chat History"><i class="fa-solid fa-rotate-right"></i> New Chat</button>
+                    <span class="status-indicator" id="apiStatus">Connecting...</span>
+                </div>
+            </header>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        Hello! Upload your documents on the left, check the ones you want to analyze, and ask me anything.
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="input-wrapper">
+                    <input type="text" id="userInput" placeholder="Ask a question about your selected documents..." autocomplete="off">
+                    <button id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

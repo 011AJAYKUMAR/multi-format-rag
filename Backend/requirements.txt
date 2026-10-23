@@ -1,0 +1,23 @@
+fastapi
+uvicorn
+python-dotenv
+pydantic
+pydantic-settings
+python-multipart
+
+# LangChain & OpenAI
+langchain
+langchain-openai
+langchain-community
+langchain-groq
+langchain-huggingface
+sentence-transformers
+
+# Weaviate Client
+weaviate-client
+
+# Document Parsers
+pypdf
+python-docx
+openpyxl
+pandas

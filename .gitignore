@@ -1,0 +1,20 @@
+# Environment secrets (CRITICAL: Never commit API keys)
+.env
+*.env
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# Uploaded & Temporary Data Files
+Backend/temp_uploads/*
+!Backend/temp_uploads/.gitkeep
+Backend/uploaded_files.json
+
+# OS Junk Files
+.DS_Store
+Thumbs.db

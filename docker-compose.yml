@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: ./Backend    # Capital 'B' to match your folder
+      dockerfile: Dockerfile
+    container_name: rag_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - WEAVIATE_URL=${WEAVIATE_URL}
+      - WEAVIATE_API_KEY=${WEAVIATE_API_KEY}
+    volumes:
+      - ./Backend/temp_uploads:/app/temp_uploads
+      - ./Backend/uploaded_files.json:/app/uploaded_files.json
+    restart: always
+
+  frontend:
+    build:
+      context: ./Frontend   # Capital 'F' to match your folder
+      dockerfile: Dockerfile
+    container_name: rag_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always
